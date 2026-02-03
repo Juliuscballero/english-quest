@@ -141,14 +141,20 @@ input{
 
 <hr>
 
-<h2>🍕🥦 Likes</h2>
-<p>Toca comida y elige:</p>
-<span class="food" onclick="pick('Pizza')">🍕</span>
-<span class="food" onclick="pick('Broccoli')">🥦</span>
-<br>
-<button onclick="like()">I like</button>
-<button onclick="like()">I don't like</button>
+<h2>💚 Pregunta importante</h2>
+<p><b>¿Me amas o me odias?</b></p>
+
+<button onclick="loveAnswer()">💚 Me amas</button>
+<button onclick="loveAnswer()">😈 Me odias</button>
+
 <p id="msg2"></p>
+
+<div id="proposal" style="display:none; margin-top:20px;">
+  <p><b>¿Quieres volver a ser mi mujer?</b></p>
+  <button onclick="proposalYes()">💍 Sí</button>
+  <button onclick="proposalYes()">💍 Sí</button>
+</div>
+
 
 </div>
 
@@ -204,6 +210,21 @@ function like(){
   }
 }
 </script>
+<script>
+function loveAnswer(){
+  msg2.innerHTML = "💚 Mi cachetes hermosa, mi corazón… OBVIO me amas 💋 MUAK";
+  addCoins(5);
+  confetti();
+  document.getElementById("proposal").style.display = "block";
+}
+
+function proposalYes(){
+  msg2.innerHTML = "💍 MI MUJER PARA SIEMPRE 💚💚💚 MUAK MUAK MUAK";
+  addCoins(10);
+  confetti();
+}
+</script>
 
 </body>
 </html>
+
