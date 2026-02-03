@@ -38,7 +38,7 @@ h1{
 
 .container{
   background:#ecfdf5;
-  margin:90px 10px 30px;
+  margin:90px 10px 40px;
   padding:20px;
   border:6px solid #facc15;
   border-radius:10px;
@@ -77,7 +77,7 @@ input{
   width:90%;
 }
 
-/* 💕 Corazones */
+/* 💕 corazones */
 .heart{
   position:fixed;
   bottom:-20px;
@@ -91,7 +91,7 @@ input{
   to{ transform:translateY(-120vh); opacity:0; }
 }
 
-/* 🎉 Confetti */
+/* 🎉 confetti */
 .confetti{
   position:fixed;
   width:8px;
@@ -104,7 +104,7 @@ input{
   to{ transform:translateY(300px) rotate(360deg); opacity:0; }
 }
 
-/* 💍 Pantalla final */
+/* 💍 final */
 #finalScreen{
   position:fixed;
   inset:0;
@@ -147,6 +147,7 @@ input{
 <hr>
 
 <!-- NIVEL 2 -->
+<div id="level2" style="display:none;">
 <h2>💚 Nivel 2</h2>
 <p><b>¿Me amas o me odias?</b></p>
 <button onclick="loveAnswer()">💚 Me amas</button>
@@ -158,58 +159,53 @@ input{
   <button onclick="proposalYes()">💍 Sí</button>
   <button onclick="proposalYes()">💍 Sí</button>
 </div>
+</div>
 
 <hr>
 
 <!-- NIVEL 3 -->
 <div id="level3" style="display:none;">
-  <h2>😏 Nivel 3</h2>
-  <p><b>¿Tu hombre se rifó con esta sorpresa?</b></p>
-  <button onclick="proudAnswer()">🔥 Sí, se rifó</button>
-  <button onclick="proudAnswer()">🙄 Sí, pero no llores</button>
+<h2>😎 Nivel 3</h2>
+<p><b>¿Tu hombre se rifó con esta sorpresa?</b></p>
+<button onclick="proudAnswer()">🔥 Sí, se rifó</button>
+<button onclick="proudAnswer()">🙄 Sí, pero no llores</button>
 </div>
 
 <hr>
 
 <!-- NIVEL 4 -->
 <div id="level4" style="display:none;">
-  <h2>☕ Nivel 4</h2>
-  <p><b>Completa la frase:</b></p>
-  <p>“Me encanta mi niño ________”</p>
-  <button onclick="coffeeAnswer()">☕ cafecito</button>
-  <button onclick="coffeeAnswer()">😎 guapo</button>
+<h2>☕ Nivel 4</h2>
+<p>Completa la frase:</p>
+<p><b>Me encanta mi niño ________</b></p>
+<button onclick="coffeeAnswer()">☕ cafecito</button>
+<button onclick="coffeeAnswer()">😎 guapo</button>
 </div>
 
 </div>
 
-<!-- 💍 FINAL -->
+<!-- FINAL -->
 <div id="finalScreen">
   <h2>💍 Mi mujer para siempre</h2>
   <p>
-    Si llegaste hasta aquí,  
-    es porque sabes que esto no es juego.  
-    <br><br>
-    Me rifé porque te amo,  
-    porque eres mi hogar,  
-    mi cachetes hermosa,  
-    mi paz y mi locura bonita.  
-    <br><br>
-    Gracias por ser mi mujer 💚  
+    No hice esta página por juego.<br><br>
+    La hice porque te amo, porque eres mi hogar,
+    mi cachetes hermosa, mi niña y mi paz.<br><br>
+    Gracias por existir y por elegirme 💚<br><br>
     — JUJU
   </p>
 </div>
 
-<!-- 🔊 Sonido beso -->
 <audio id="kissSound">
   <source src="https://assets.mixkit.co/sfx/preview/mixkit-quick-kiss-2155.mp3">
 </audio>
 
 <script>
-let coins=0;
+let coins = 0;
 
 function addCoins(n){
-  coins+=n;
-  coinCount.innerText=coins;
+  coins += n;
+  coinCount.innerText = coins;
 }
 
 function confetti(){
@@ -225,7 +221,7 @@ function confetti(){
 
 function kiss(){ kissSound.play(); }
 
-/* 💕 corazones */
+/* corazones */
 setInterval(()=>{
   let h=document.createElement("div");
   h.className="heart";
@@ -234,17 +230,19 @@ setInterval(()=>{
   h.style.fontSize=(16+Math.random()*20)+"px";
   document.body.appendChild(h);
   setTimeout(()=>h.remove(),6000);
-},800);
+},900);
 
 /* NIVEL 1 */
 function checkGreeting(){
-  let text=greet.value.toLowerCase();
-  let valid=["piojito","cachetitos","yamimiris","yam","yami"];
-  if(valid.some(v=>text.includes(v))){
-    msg1.innerHTML="💚 Correcto mi amor MUAK";
+  let t=greet.value.toLowerCase();
+  let ok=["piojito","cachetitos","yamimiris","yam","yami"];
+  if(ok.some(v=>t.includes(v))){
+    msg1.innerHTML="💚 Perfecto mi amor MUAK";
     addCoins(5); confetti(); kiss();
+    level2.style.display="block";
+    level2.scrollIntoView({behavior:"smooth"});
   }else{
-    msg1.innerHTML="😅 Mi pestosa bella, pon tu nombre bonito";
+    msg1.innerHTML="😅 Escribe tu nombre bonito, mi pestosa";
   }
 }
 
@@ -257,25 +255,24 @@ function loveAnswer(){
 
 function proposalYes(){
   addCoins(10); confetti(); kiss();
-  document.getElementById("level3").style.display="block";
+  level3.style.display="block";
+  level3.scrollIntoView({behavior:"smooth"});
 }
 
 /* NIVEL 3 */
 function proudAnswer(){
-  document.getElementById("level3").innerHTML=
-    "<p>😎 OBVIO se rifó tu hombre MUAK</p>";
   addCoins(10); confetti(); kiss();
-  document.getElementById("level4").style.display="block";
+  level3.innerHTML="<p>😎 OBVIO tu hombre se rifó MUAK</p>";
+  level4.style.display="block";
+  level4.scrollIntoView({behavior:"smooth"});
 }
 
 /* NIVEL 4 */
 function coffeeAnswer(){
   addCoins(15); confetti(); kiss();
-  setTimeout(()=>{ finalScreen.style.display="flex"; },600);
+  setTimeout(()=>{ finalScreen.style.display="flex"; },700);
 }
 </script>
 
 </body>
 </html>
-
-
