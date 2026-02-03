@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>English Quest: JUJU & Yamimiris</title>
+<title>Para mi pestosa hermosa 💚</title>
 
 <style>
 body{
@@ -12,11 +12,17 @@ body{
   font-family: monospace;
   color:#064e3b;
   text-align:center;
+  overflow-x:hidden;
 }
 
 h1{
   margin:15px;
   text-shadow:2px 2px #facc15;
+}
+
+#subtitle{
+  font-size:14px;
+  margin-top:-10px;
 }
 
 #coins{
@@ -27,6 +33,7 @@ h1{
   color:#facc15;
   padding:8px 12px;
   border:3px solid #facc15;
+  z-index:10;
 }
 
 .container{
@@ -60,37 +67,31 @@ button{
   margin:6px;
   font-family:monospace;
   border-radius:6px;
+  cursor:pointer;
 }
 
-button:active{
-  transform:scale(0.95);
-}
+button:active{ transform:scale(0.95); }
 
 input{
   padding:10px;
   width:90%;
 }
 
-.turtle{
+/* 💕 Corazones */
+.heart{
   position:fixed;
-  bottom:10px;
-  left:-40px;
-  width:30px;
-  height:20px;
-  background:#16a34a;
-  border:3px solid #064e3b;
-  animation:turtleMove 18s linear infinite;
-}
-.turtle.two{
-  bottom:50px;
-  animation-duration:26s;
+  bottom:-20px;
+  font-size:20px;
+  animation:floatUp 6s linear infinite;
+  opacity:0.7;
 }
 
-@keyframes turtleMove{
-  from{left:-40px;}
-  to{left:110%;}
+@keyframes floatUp{
+  from{ transform:translateY(0); opacity:0.8; }
+  to{ transform:translateY(-120vh); opacity:0; }
 }
 
+/* 🎉 Confetti */
 .confetti{
   position:fixed;
   width:8px;
@@ -98,8 +99,33 @@ input{
   top:0;
   animation:fall 2s linear forwards;
 }
+
 @keyframes fall{
   to{ transform:translateY(300px) rotate(360deg); opacity:0; }
+}
+
+/* 💍 Pantalla final */
+#finalScreen{
+  position:fixed;
+  inset:0;
+  background:#065f46;
+  color:#fefce8;
+  display:none;
+  align-items:center;
+  justify-content:center;
+  flex-direction:column;
+  padding:20px;
+  z-index:100;
+}
+
+#finalScreen h2{
+  font-size:22px;
+}
+
+#finalScreen p{
+  max-width:500px;
+  font-size:14px;
+  line-height:1.6;
 }
 </style>
 </head>
@@ -109,22 +135,20 @@ input{
 <div id="coins">🪙 <span id="coinCount">0</span></div>
 
 <h1>Para mi pestosa hermosa 💚</h1>
-<p style="margin-top:-10px; font-size:14px;">
-  con amor, mi tdh me obligó a crearte una página 😌
-</p>
-
+<div id="subtitle">con amor, mi tdh me obligó a crearte una página 😌</div>
 
 <div class="container">
 
 <div class="characters">
-  <img src="juju.png" alt="Juju">
-  <img src="novia.png" alt="Mi niña">
-  <img src="gato.png" alt="gatito">
-  <img src="perrito.png" alt="perrito">
+  <img src="juju.png">
+  <img src="novia.png">
+  <img src="gato.png">
+  <img src="perrito.png">
 </div>
 
-<h2>👋 Calentamiento</h2>
-<p><b>Escribe:</b> Hello, my name is...</p>
+<!-- NIVEL 1 -->
+<h2>👋 Nivel 1</h2>
+<p>Escribe: <b>Hello, my name is...</b></p>
 <input id="greet">
 <br><br>
 <button onclick="checkGreeting()">Check</button>
@@ -132,15 +156,14 @@ input{
 
 <hr>
 
-<h2>💚 Pregunta importante</h2>
+<!-- NIVEL 2 -->
+<h2>💚 Nivel 2</h2>
 <p><b>¿Me amas o me odias?</b></p>
-
 <button onclick="loveAnswer()">💚 Me amas</button>
 <button onclick="loveAnswer()">😈 Me odias</button>
-
 <p id="msg2"></p>
 
-<div id="proposal" style="display:none; margin-top:20px;">
+<div id="proposal" style="display:none;">
   <p><b>¿Quieres volver a ser mi mujer?</b></p>
   <button onclick="proposalYes()">💍 Sí</button>
   <button onclick="proposalYes()">💍 Sí</button>
@@ -148,59 +171,82 @@ input{
 
 </div>
 
-<div class="turtle"></div>
-<div class="turtle two"></div>
+<!-- 💍 FINAL -->
+<div id="finalScreen">
+  <h2>💍 Mi mujer para siempre</h2>
+  <p>
+    No hice esta página por juego.  
+    La hice porque te amo, porque eres mi hogar,
+    mi cachetes hermosa, mi niña, mi corazón.  
+    <br><br>
+    Gracias por existir, por elegirme,
+    por volver a mí 💚  
+    <br><br>
+    — JUJU
+  </p>
+</div>
+
+<!-- 🔊 Sonido beso -->
+<audio id="kissSound">
+  <source src="https://assets.mixkit.co/sfx/preview/mixkit-quick-kiss-2155.mp3" type="audio/mpeg">
+</audio>
 
 <script>
-let coins = 0;
+let coins=0;
 
 function addCoins(n){
-  coins += n;
-  document.getElementById("coinCount").innerText = coins;
+  coins+=n;
+  coinCount.innerText=coins;
 }
 
 function confetti(){
-  for(let i=0;i<14;i++){
-    let c = document.createElement("div");
-    c.className = "confetti";
-    c.style.left = Math.random()*window.innerWidth + "px";
-    c.style.background = ["#facc15","#22c55e","#3b82f6","#ec4899"][Math.floor(Math.random()*4)];
+  for(let i=0;i<20;i++){
+    let c=document.createElement("div");
+    c.className="confetti";
+    c.style.left=Math.random()*innerWidth+"px";
+    c.style.background=["#facc15","#22c55e","#3b82f6","#ec4899"][Math.floor(Math.random()*4)];
     document.body.appendChild(c);
     setTimeout(()=>c.remove(),2000);
   }
 }
 
-function checkGreeting(){
-  let v = document.getElementById("greet").value.toLowerCase();
-  let m = document.getElementById("msg1");
+function kiss(){
+  document.getElementById("kissSound").play();
+}
 
-  if(v.startsWith("hello, my name is")){
-    m.innerHTML = "💚 Mi cachetes hermosa, mi corazón, mi niña… PERFECTO 💋 MUAK";
-    addCoins(5);
-    confetti();
+/* 💕 corazones constantes */
+setInterval(()=>{
+  let h=document.createElement("div");
+  h.className="heart";
+  h.innerHTML="💚";
+  h.style.left=Math.random()*100+"vw";
+  h.style.fontSize=(16+Math.random()*20)+"px";
+  document.body.appendChild(h);
+  setTimeout(()=>h.remove(),6000);
+},800);
+
+function checkGreeting(){
+  if(greet.value.toLowerCase().startsWith("hello, my name is")){
+    msg1.innerHTML="💋 Perfecto mi amor MUAK";
+    addCoins(5); confetti(); kiss();
   }else{
-    m.innerHTML = "😴 Mi pestosa bella, inténtalo otra vez";
+    msg1.innerHTML="😅 Inténtalo otra vez, mi pestosa bella";
   }
 }
 
 function loveAnswer(){
-  document.getElementById("msg2").innerHTML =
-    "💚 Mi amor… OBVIO me amas, aunque digas que no 💋 MUAK";
-  addCoins(5);
-  confetti();
-  document.getElementById("proposal").style.display = "block";
+  msg2.innerHTML="💚 Sabía que me amabas MUAK";
+  addCoins(5); confetti(); kiss();
+  proposal.style.display="block";
 }
 
 function proposalYes(){
-  document.getElementById("msg2").innerHTML =
-    "💍 MI MUJER PARA SIEMPRE 💚💚💚 MUAK MUAK MUAK";
-  addCoins(10);
-  confetti();
+  addCoins(20); confetti(); kiss();
+  setTimeout(()=>{
+    finalScreen.style.display="flex";
+  },800);
 }
 </script>
 
 </body>
 </html>
-
-
-
