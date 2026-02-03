@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Para mi pestosa hermosa 💚</title>
+<title>English Quest: JUJU & Yamimiris</title>
 
 <style>
 body{
@@ -12,17 +12,11 @@ body{
   font-family: monospace;
   color:#064e3b;
   text-align:center;
-  overflow-x:hidden;
 }
 
 h1{
-  margin:15px;
+  margin:20px;
   text-shadow:2px 2px #facc15;
-}
-
-#subtitle{
-  font-size:14px;
-  margin-top:-10px;
 }
 
 #coins{
@@ -31,68 +25,62 @@ h1{
   right:10px;
   background:#065f46;
   color:#facc15;
-  padding:8px 12px;
+  padding:8px;
   border:3px solid #facc15;
-  z-index:10;
+  font-size:14px;
 }
 
 .container{
   background:#ecfdf5;
-  margin:90px 10px 40px;
+  margin:80px 10px 30px;
   padding:20px;
   border:6px solid #facc15;
-  border-radius:12px;
-}
-
-.characters{
-  display:flex;
-  justify-content:center;
-  gap:10px;
-  flex-wrap:wrap;
-  margin-bottom:15px;
-}
-
-.characters img{
-  width:90px;
-  image-rendering: pixelated;
-  border:4px solid #000;
-  border-radius:8px;
-  background:#fff;
 }
 
 button{
   background:#22c55e;
   border:3px solid #000;
-  padding:12px 16px;
+  padding:12px;
   margin:6px;
   font-family:monospace;
-  border-radius:8px;
-  cursor:pointer;
 }
 
-button:active{ transform:scale(0.95); }
+button:active{
+  transform:scale(0.95);
+}
 
 input{
   padding:10px;
   width:90%;
-  border-radius:8px;
+  font-family:monospace;
 }
 
-/* 💕 corazones */
-.heart{
+.food{
+  font-size:40px;
+  margin:10px;
+}
+
+.turtle{
   position:fixed;
-  bottom:-20px;
-  font-size:22px;
-  animation:floatUp 6s linear infinite;
-  opacity:0.7;
+  bottom:10px;
+  left:-40px;
+  width:30px;
+  height:20px;
+  background:#16a34a;
+  border:3px solid #064e3b;
+  animation:turtleMove 18s linear infinite;
 }
 
-@keyframes floatUp{
-  from{ transform:translateY(0); opacity:0.8; }
-  to{ transform:translateY(-120vh); opacity:0; }
+.turtle.two{
+  bottom:50px;
+  animation-duration:26s;
 }
 
-/* 🎉 confetti */
+@keyframes turtleMove{
+  from{left:-40px;}
+  to{left:110%;}
+}
+
 .confetti{
   position:fixed;
   width:8px;
@@ -102,22 +90,10 @@ input{
 }
 
 @keyframes fall{
-  to{ transform:translateY(300px) rotate(360deg); opacity:0; }
-}
-
-/* 💍 final */
-#finalScreen{
-  position:fixed;
-  inset:0;
-  background:linear-gradient(#065f46,#022c22);
-  color:#fefce8;
-  display:none;
-  align-items:center;
-  justify-content:center;
-  flex-direction:column;
-  padding:25px;
-  z-index:100;
-  text-align:center;
+  to{
+    transform:translateY(300px) rotate(360deg);
+    opacity:0;
+  }
 }
 </style>
 </head>
@@ -126,163 +102,85 @@ input{
 
 <div id="coins">🪙 <span id="coinCount">0</span></div>
 
-<h1>Para mi pestosa hermosa 💚</h1>
-<div id="subtitle">con amor, mi tdh me obligó a crearte esta locura 😌</div>
+<h1>English Quest<br>JUJU & Yamimiris</h1>
 
 <div class="container">
 
-<div class="characters">
-  <img src="juju.png">
-  <img src="novia.png">
-  <img src="gato.png">
-  <img src="perrito.png">
-</div>
-
-<!-- NIVEL 1 -->
-<h2>💚 Nivel 1 — Presentación oficial</h2>
-<p>Escribe uno de tus nombres bonitos, los que solo yo te digo 😌</p>
+<h2>👋 Greetings</h2>
+<p>Type:</p>
+<strong>Hello, my name is...</strong><br><br>
 <input id="greet">
 <br><br>
-<button onclick="checkGreeting()">Validar amor</button>
+<button onclick="checkGreeting()">Check</button>
 <p id="msg1"></p>
 
 <hr>
 
-<!-- NIVEL 2 -->
-<div id="level2" style="display:none;">
-<h2>😈 Nivel 2 — La verdad absoluta</h2>
-<p><b>Respóndeme con sinceridad…</b></p>
-<p><b>¿Me amas o me odias?</b></p>
-<button onclick="loveAnswer()">💚 Te amo</button>
-<button onclick="loveAnswer()">😒 Te odio (mentira)</button>
+<h2>🍕🥦 Likes</h2>
+<p>Tap food:</p>
+<span class="food" onclick="pick('Pizza')">🍕</span>
+<span class="food" onclick="pick('Broccoli')">🥦</span>
+<br>
+<button onclick="like()">I like</button>
+<button onclick="like()">I don't like</button>
 <p id="msg2"></p>
 
-<div id="proposal" style="display:none;">
-  <p><b>Y ahora lo importante…</b></p>
-  <p><b>¿Quieres volver a ser mi mujer?</b></p>
-  <button onclick="proposalYes()">💍 Sí, obvio</button>
-  <button onclick="proposalYes()">💍 Sí, pero no llores</button>
-</div>
 </div>
 
-<hr>
-
-<!-- NIVEL 3 -->
-<div id="level3" style="display:none;">
-<h2>🔥 Nivel 3 — Reconocimiento oficial</h2>
-<p><b>Di la verdad:</b></p>
-<p>¿Tu hombre se rifó con esta sorpresa?</p>
-<button onclick="proudAnswer()">😎 Se rifó cabrón</button>
-<button onclick="proudAnswer()">🥹 Sí y me dio ternura</button>
-</div>
-
-<hr>
-
-<!-- NIVEL 4 -->
-<div id="level4" style="display:none;">
-<h2>☕ Nivel 4 — Frase final</h2>
-<p>Completa la frase correcta 😌</p>
-<p><b>“Me encanta mi niño ________”</b></p>
-<button onclick="coffeeAnswer()">☕ cafecito</button>
-<button onclick="coffeeAnswer()">💚 precioso</button>
-</div>
-
-</div>
-
-<!-- FINAL -->
-<div id="finalScreen">
-  <h2>💍 Mi mujer, mi casa, mi todo</h2>
-  <p>
-    Si llegaste hasta aquí, no fue por curiosidad.<br><br>
-    Fue porque seguimos eligiéndonos,
-    porque nos queremos con todo y locuras,
-    porque eres mi cachetes hermosa,
-    mi niña, mi corazón y mi lugar seguro.<br><br>
-    Gracias por volver,
-    gracias por quedarte,
-    gracias por ser tú.<br><br>
-    💚 Siempre tuyo — JUJU
-  </p>
-</div>
-
-<audio id="kissSound">
-  <source src="https://assets.mixkit.co/sfx/preview/mixkit-quick-kiss-2155.mp3">
-</audio>
+<div class="turtle"></div>
+<div class="turtle two"></div>
 
 <script>
 let coins=0;
+let food=null;
 
 function addCoins(n){
   coins+=n;
-  coinCount.innerText=coins;
+  document.getElementById("coinCount").innerText=coins;
 }
 
 function confetti(){
-  for(let i=0;i<20;i++){
+  for(let i=0;i<12;i++){
     let c=document.createElement("div");
     c.className="confetti";
-    c.style.left=Math.random()*innerWidth+"px";
-    c.style.background=["#facc15","#22c55e","#3b82f6","#ec4899"][Math.floor(Math.random()*4)];
+    c.style.left=Math.random()*window.innerWidth+"px";
+    c.style.background=["#facc15","#22c55e","#3b82f6"][Math.floor(Math.random()*3)];
     document.body.appendChild(c);
     setTimeout(()=>c.remove(),2000);
   }
 }
 
-function kiss(){ kissSound.play(); }
-
-/* corazones flotando */
-setInterval(()=>{
-  let h=document.createElement("div");
-  h.className="heart";
-  h.innerHTML=["💚","💖","💕"][Math.floor(Math.random()*3)];
-  h.style.left=Math.random()*100+"vw";
-  h.style.fontSize=(18+Math.random()*22)+"px";
-  document.body.appendChild(h);
-  setTimeout(()=>h.remove(),6000);
-},700);
-
-/* NIVEL 1 */
 function checkGreeting(){
-  let t=greet.value.toLowerCase();
-  let ok=["piojito","cachetitos","yamimiris","yam","yami"];
-  if(ok.some(v=>t.includes(v))){
-    msg1.innerHTML="💚 Correctísimo mi amor… ven acá MUAK 💋";
-    addCoins(5); confetti(); kiss();
-    level2.style.display="block";
-    level2.scrollIntoView({behavior:"smooth"});
+  let v=document.getElementById("greet").value.toLowerCase();
+  let m=document.getElementById("msg1");
+  if(v.startsWith("hello, my name is")){
+    m.innerHTML="💚 ¡JUJU está orgulloso de ti!";
+    addCoins(5);
+    confetti();
   }else{
-    msg1.innerHTML="😌 No te hagas… escribe tu nombre bonito, mi vida";
+    m.innerHTML="😴 Yamimiris dice: intenta otra vez";
   }
 }
 
-/* NIVEL 2 */
-function loveAnswer(){
-  msg2.innerHTML="💚 Yo sabía… aunque te hagas la dura 😌 MUAK";
-  addCoins(5); confetti(); kiss();
-  proposal.style.display="block";
+function pick(f){
+  food=f;
+  document.getElementById("msg2").innerHTML="You chose "+f;
 }
 
-function proposalYes(){
-  addCoins(10); confetti(); kiss();
-  level3.style.display="block";
-  level3.scrollIntoView({behavior:"smooth"});
-}
-
-/* NIVEL 3 */
-function proudAnswer(){
-  addCoins(10); confetti(); kiss();
-  level3.innerHTML="<p>😎 Claro que se rifó tu hombre… y lo volvería a hacer 💚</p>";
-  level4.style.display="block";
-  level4.scrollIntoView({behavior:"smooth"});
-}
-
-/* NIVEL 4 */
-function coffeeAnswer(){
-  addCoins(20); confetti(); kiss();
-  setTimeout(()=>{ finalScreen.style.display="flex"; },700);
+function like(){
+  let m=document.getElementById("msg2");
+  if(food){
+    m.innerHTML="✨ ¡Yamimiris se emocionó!";
+    addCoins(5);
+    confetti();
+    food=null;
+  }else{
+    m.innerHTML="👀 JUJU dice: elige comida primero";
+  }
 }
 </script>
 
 </body>
 </html>
+
 
