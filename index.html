@@ -41,7 +41,7 @@ h1{
   margin:90px 10px 40px;
   padding:20px;
   border:6px solid #facc15;
-  border-radius:10px;
+  border-radius:12px;
 }
 
 .characters{
@@ -63,10 +63,10 @@ h1{
 button{
   background:#22c55e;
   border:3px solid #000;
-  padding:12px;
+  padding:12px 16px;
   margin:6px;
   font-family:monospace;
-  border-radius:6px;
+  border-radius:8px;
   cursor:pointer;
 }
 
@@ -75,13 +75,14 @@ button:active{ transform:scale(0.95); }
 input{
   padding:10px;
   width:90%;
+  border-radius:8px;
 }
 
 /* 💕 corazones */
 .heart{
   position:fixed;
   bottom:-20px;
-  font-size:20px;
+  font-size:22px;
   animation:floatUp 6s linear infinite;
   opacity:0.7;
 }
@@ -108,14 +109,15 @@ input{
 #finalScreen{
   position:fixed;
   inset:0;
-  background:#065f46;
+  background:linear-gradient(#065f46,#022c22);
   color:#fefce8;
   display:none;
   align-items:center;
   justify-content:center;
   flex-direction:column;
-  padding:20px;
+  padding:25px;
   z-index:100;
+  text-align:center;
 }
 </style>
 </head>
@@ -125,7 +127,7 @@ input{
 <div id="coins">🪙 <span id="coinCount">0</span></div>
 
 <h1>Para mi pestosa hermosa 💚</h1>
-<div id="subtitle">con amor, mi tdh me obligó a crearte una página 😌</div>
+<div id="subtitle">con amor, mi tdh me obligó a crearte esta locura 😌</div>
 
 <div class="container">
 
@@ -137,27 +139,29 @@ input{
 </div>
 
 <!-- NIVEL 1 -->
-<h2>👋 Nivel 1</h2>
-<p>Escribe tu nombre bonito 💚</p>
+<h2>💚 Nivel 1 — Presentación oficial</h2>
+<p>Escribe uno de tus nombres bonitos, los que solo yo te digo 😌</p>
 <input id="greet">
 <br><br>
-<button onclick="checkGreeting()">Check</button>
+<button onclick="checkGreeting()">Validar amor</button>
 <p id="msg1"></p>
 
 <hr>
 
 <!-- NIVEL 2 -->
 <div id="level2" style="display:none;">
-<h2>💚 Nivel 2</h2>
+<h2>😈 Nivel 2 — La verdad absoluta</h2>
+<p><b>Respóndeme con sinceridad…</b></p>
 <p><b>¿Me amas o me odias?</b></p>
-<button onclick="loveAnswer()">💚 Me amas</button>
-<button onclick="loveAnswer()">😈 Me odias</button>
+<button onclick="loveAnswer()">💚 Te amo</button>
+<button onclick="loveAnswer()">😒 Te odio (mentira)</button>
 <p id="msg2"></p>
 
 <div id="proposal" style="display:none;">
+  <p><b>Y ahora lo importante…</b></p>
   <p><b>¿Quieres volver a ser mi mujer?</b></p>
-  <button onclick="proposalYes()">💍 Sí</button>
-  <button onclick="proposalYes()">💍 Sí</button>
+  <button onclick="proposalYes()">💍 Sí, obvio</button>
+  <button onclick="proposalYes()">💍 Sí, pero no llores</button>
 </div>
 </div>
 
@@ -165,34 +169,39 @@ input{
 
 <!-- NIVEL 3 -->
 <div id="level3" style="display:none;">
-<h2>😎 Nivel 3</h2>
-<p><b>¿Tu hombre se rifó con esta sorpresa?</b></p>
-<button onclick="proudAnswer()">🔥 Sí, se rifó</button>
-<button onclick="proudAnswer()">🙄 Sí, pero no llores</button>
+<h2>🔥 Nivel 3 — Reconocimiento oficial</h2>
+<p><b>Di la verdad:</b></p>
+<p>¿Tu hombre se rifó con esta sorpresa?</p>
+<button onclick="proudAnswer()">😎 Se rifó cabrón</button>
+<button onclick="proudAnswer()">🥹 Sí y me dio ternura</button>
 </div>
 
 <hr>
 
 <!-- NIVEL 4 -->
 <div id="level4" style="display:none;">
-<h2>☕ Nivel 4</h2>
-<p>Completa la frase:</p>
-<p><b>Me encanta mi niño ________</b></p>
+<h2>☕ Nivel 4 — Frase final</h2>
+<p>Completa la frase correcta 😌</p>
+<p><b>“Me encanta mi niño ________”</b></p>
 <button onclick="coffeeAnswer()">☕ cafecito</button>
-<button onclick="coffeeAnswer()">😎 guapo</button>
+<button onclick="coffeeAnswer()">💚 precioso</button>
 </div>
 
 </div>
 
 <!-- FINAL -->
 <div id="finalScreen">
-  <h2>💍 Mi mujer para siempre</h2>
+  <h2>💍 Mi mujer, mi casa, mi todo</h2>
   <p>
-    No hice esta página por juego.<br><br>
-    La hice porque te amo, porque eres mi hogar,
-    mi cachetes hermosa, mi niña y mi paz.<br><br>
-    Gracias por existir y por elegirme 💚<br><br>
-    — JUJU
+    Si llegaste hasta aquí, no fue por curiosidad.<br><br>
+    Fue porque seguimos eligiéndonos,
+    porque nos queremos con todo y locuras,
+    porque eres mi cachetes hermosa,
+    mi niña, mi corazón y mi lugar seguro.<br><br>
+    Gracias por volver,
+    gracias por quedarte,
+    gracias por ser tú.<br><br>
+    💚 Siempre tuyo — JUJU
   </p>
 </div>
 
@@ -201,15 +210,15 @@ input{
 </audio>
 
 <script>
-let coins = 0;
+let coins=0;
 
 function addCoins(n){
-  coins += n;
-  coinCount.innerText = coins;
+  coins+=n;
+  coinCount.innerText=coins;
 }
 
 function confetti(){
-  for(let i=0;i<18;i++){
+  for(let i=0;i<20;i++){
     let c=document.createElement("div");
     c.className="confetti";
     c.style.left=Math.random()*innerWidth+"px";
@@ -221,34 +230,34 @@ function confetti(){
 
 function kiss(){ kissSound.play(); }
 
-/* corazones */
+/* corazones flotando */
 setInterval(()=>{
   let h=document.createElement("div");
   h.className="heart";
-  h.innerHTML="💚";
+  h.innerHTML=["💚","💖","💕"][Math.floor(Math.random()*3)];
   h.style.left=Math.random()*100+"vw";
-  h.style.fontSize=(16+Math.random()*20)+"px";
+  h.style.fontSize=(18+Math.random()*22)+"px";
   document.body.appendChild(h);
   setTimeout(()=>h.remove(),6000);
-},900);
+},700);
 
 /* NIVEL 1 */
 function checkGreeting(){
   let t=greet.value.toLowerCase();
   let ok=["piojito","cachetitos","yamimiris","yam","yami"];
   if(ok.some(v=>t.includes(v))){
-    msg1.innerHTML="💚 Perfecto mi amor MUAK";
+    msg1.innerHTML="💚 Correctísimo mi amor… ven acá MUAK 💋";
     addCoins(5); confetti(); kiss();
     level2.style.display="block";
     level2.scrollIntoView({behavior:"smooth"});
   }else{
-    msg1.innerHTML="😅 Escribe tu nombre bonito, mi pestosa";
+    msg1.innerHTML="😌 No te hagas… escribe tu nombre bonito, mi vida";
   }
 }
 
 /* NIVEL 2 */
 function loveAnswer(){
-  msg2.innerHTML="💚 Sabía que me amabas MUAK";
+  msg2.innerHTML="💚 Yo sabía… aunque te hagas la dura 😌 MUAK";
   addCoins(5); confetti(); kiss();
   proposal.style.display="block";
 }
@@ -262,17 +271,18 @@ function proposalYes(){
 /* NIVEL 3 */
 function proudAnswer(){
   addCoins(10); confetti(); kiss();
-  level3.innerHTML="<p>😎 OBVIO tu hombre se rifó MUAK</p>";
+  level3.innerHTML="<p>😎 Claro que se rifó tu hombre… y lo volvería a hacer 💚</p>";
   level4.style.display="block";
   level4.scrollIntoView({behavior:"smooth"});
 }
 
 /* NIVEL 4 */
 function coffeeAnswer(){
-  addCoins(15); confetti(); kiss();
+  addCoins(20); confetti(); kiss();
   setTimeout(()=>{ finalScreen.style.display="flex"; },700);
 }
 </script>
 
 </body>
 </html>
+
