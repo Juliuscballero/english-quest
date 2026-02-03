@@ -117,16 +117,6 @@ input{
   padding:20px;
   z-index:100;
 }
-
-#finalScreen h2{
-  font-size:22px;
-}
-
-#finalScreen p{
-  max-width:500px;
-  font-size:14px;
-  line-height:1.6;
-}
 </style>
 </head>
 
@@ -148,7 +138,7 @@ input{
 
 <!-- NIVEL 1 -->
 <h2>👋 Nivel 1</h2>
-<p>Escribe: <b>Hello, my name is...</b></p>
+<p>Escribe tu nombre bonito 💚</p>
 <input id="greet">
 <br><br>
 <button onclick="checkGreeting()">Check</button>
@@ -169,26 +159,49 @@ input{
   <button onclick="proposalYes()">💍 Sí</button>
 </div>
 
+<hr>
+
+<!-- NIVEL 3 -->
+<div id="level3" style="display:none;">
+  <h2>😏 Nivel 3</h2>
+  <p><b>¿Tu hombre se rifó con esta sorpresa?</b></p>
+  <button onclick="proudAnswer()">🔥 Sí, se rifó</button>
+  <button onclick="proudAnswer()">🙄 Sí, pero no llores</button>
+</div>
+
+<hr>
+
+<!-- NIVEL 4 -->
+<div id="level4" style="display:none;">
+  <h2>☕ Nivel 4</h2>
+  <p><b>Completa la frase:</b></p>
+  <p>“Me encanta mi niño ________”</p>
+  <button onclick="coffeeAnswer()">☕ cafecito</button>
+  <button onclick="coffeeAnswer()">😎 guapo</button>
+</div>
+
 </div>
 
 <!-- 💍 FINAL -->
 <div id="finalScreen">
   <h2>💍 Mi mujer para siempre</h2>
   <p>
-    No hice esta página por juego.  
-    La hice porque te amo, porque eres mi hogar,
-    mi cachetes hermosa, mi niña, mi corazón.  
+    Si llegaste hasta aquí,  
+    es porque sabes que esto no es juego.  
     <br><br>
-    Gracias por existir, por elegirme,
-    por volver a mí 💚  
+    Me rifé porque te amo,  
+    porque eres mi hogar,  
+    mi cachetes hermosa,  
+    mi paz y mi locura bonita.  
     <br><br>
+    Gracias por ser mi mujer 💚  
     — JUJU
   </p>
 </div>
 
 <!-- 🔊 Sonido beso -->
 <audio id="kissSound">
-  <source src="https://assets.mixkit.co/sfx/preview/mixkit-quick-kiss-2155.mp3" type="audio/mpeg">
+  <source src="https://assets.mixkit.co/sfx/preview/mixkit-quick-kiss-2155.mp3">
 </audio>
 
 <script>
@@ -200,7 +213,7 @@ function addCoins(n){
 }
 
 function confetti(){
-  for(let i=0;i<20;i++){
+  for(let i=0;i<18;i++){
     let c=document.createElement("div");
     c.className="confetti";
     c.style.left=Math.random()*innerWidth+"px";
@@ -210,11 +223,9 @@ function confetti(){
   }
 }
 
-function kiss(){
-  document.getElementById("kissSound").play();
-}
+function kiss(){ kissSound.play(); }
 
-/* 💕 corazones constantes */
+/* 💕 corazones */
 setInterval(()=>{
   let h=document.createElement("div");
   h.className="heart";
@@ -225,15 +236,19 @@ setInterval(()=>{
   setTimeout(()=>h.remove(),6000);
 },800);
 
+/* NIVEL 1 */
 function checkGreeting(){
-  if(greet.value.toLowerCase().startsWith("hello, my name is")){
-    msg1.innerHTML="💋 Perfecto mi amor MUAK";
+  let text=greet.value.toLowerCase();
+  let valid=["piojito","cachetitos","yamimiris","yam","yami"];
+  if(valid.some(v=>text.includes(v))){
+    msg1.innerHTML="💚 Correcto mi amor MUAK";
     addCoins(5); confetti(); kiss();
   }else{
-    msg1.innerHTML="😅 Inténtalo otra vez, mi pestosa bella";
+    msg1.innerHTML="😅 Mi pestosa bella, pon tu nombre bonito";
   }
 }
 
+/* NIVEL 2 */
 function loveAnswer(){
   msg2.innerHTML="💚 Sabía que me amabas MUAK";
   addCoins(5); confetti(); kiss();
@@ -241,12 +256,26 @@ function loveAnswer(){
 }
 
 function proposalYes(){
-  addCoins(20); confetti(); kiss();
-  setTimeout(()=>{
-    finalScreen.style.display="flex";
-  },800);
+  addCoins(10); confetti(); kiss();
+  document.getElementById("level3").style.display="block";
+}
+
+/* NIVEL 3 */
+function proudAnswer(){
+  document.getElementById("level3").innerHTML=
+    "<p>😎 OBVIO se rifó tu hombre MUAK</p>";
+  addCoins(10); confetti(); kiss();
+  document.getElementById("level4").style.display="block";
+}
+
+/* NIVEL 4 */
+function coffeeAnswer(){
+  addCoins(15); confetti(); kiss();
+  setTimeout(()=>{ finalScreen.style.display="flex"; },600);
 }
 </script>
 
 </body>
 </html>
+
+
