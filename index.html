@@ -192,7 +192,7 @@ const finishPhrases=[
 /* ===== niveles ===== */
 function checkGreeting(){
   const t=greet.value.toLowerCase();
-  const ok=["piojito","cachetitos","yamimiris","yam","yami"];
+  const ok=["piojito","cachetitos","yamimiris","rabanito","yam","yami"];
   if(ok.some(v=>t.includes(v))){
     msg1.innerHTML = lovePhrases[Math.floor(Math.random()*lovePhrases.length)] + " <span class='badge'>MUAK 💋</span>";
     addCoins(5); confetti(); kiss(); setProg(25);
