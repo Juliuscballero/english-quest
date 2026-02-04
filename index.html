@@ -6,261 +6,174 @@
 <title>Para mi pestosa hermosa 💚</title>
 
 <style>
-:root{
-  --bg:#0f5f46; --bg2:#043b2e; --card:#ecfdf5; --gold:#facc15; --btn:#22c55e;
-}
-*{box-sizing:border-box}
 body{
-  margin:0; font-family:monospace; color:#064e3b; text-align:center;
-  background:linear-gradient(180deg,#8fd3a8,#b9f3d2);
-  overflow-x:hidden;
+  margin:0;
+  background:#8fd3a8;
+  font-family: monospace;
+  color:#064e3b;
+  text-align:center;
 }
-h1{margin:14px; text-shadow:2px 2px var(--gold)}
-#subtitle{font-size:14px; margin-top:-8px; opacity:.9}
-#coins{
-  position:fixed; top:10px; right:10px; background:#065f46; color:var(--gold);
-  padding:8px 12px; border:3px solid var(--gold); border-radius:10px; z-index:10
+
+h1{
+  margin:16px;
+  text-shadow:2px 2px #facc15;
 }
-.progress{
-  position:fixed; top:54px; left:10px; right:10px; height:10px;
-  background:#c7f9cc; border:2px solid #064e3b; border-radius:999px; overflow:hidden; z-index:9
+
+#subtitle{
+  margin-top:-10px;
+  font-size:14px;
 }
-.progress > div{height:100%; width:0%; background:#34d399; transition:width .5s ease}
 
 .container{
-  background:var(--card); margin:110px 10px 40px; padding:20px;
-  border:6px solid var(--gold); border-radius:16px; box-shadow:0 12px 0 rgba(0,0,0,.15)
+  background:#ecfdf5;
+  margin:30px 10px;
+  padding:20px;
+  border:6px solid #facc15;
+  border-radius:14px;
 }
-.characters{display:flex; justify-content:center; gap:10px; flex-wrap:wrap; margin-bottom:12px}
-.characters img{
-  width:90px; image-rendering:pixelated; border:4px solid #000; border-radius:12px; background:#fff
-}
+
 button{
-  background:var(--btn); border:3px solid #000; padding:12px 16px; margin:6px;
-  border-radius:12px; cursor:pointer; box-shadow:0 6px 0 rgba(0,0,0,.25)
+  background:#22c55e;
+  border:3px solid #000;
+  padding:12px 16px;
+  margin:6px;
+  border-radius:10px;
+  font-family:monospace;
 }
-button:active{transform:translateY(3px); box-shadow:0 3px 0 rgba(0,0,0,.25)}
-input{padding:10px; width:92%; border-radius:12px; border:2px solid #064e3b}
-hr{border:none; height:2px; background:#a7f3d0; margin:16px 0}
 
-/* corazones */
-.heart{position:fixed; bottom:-20px; font-size:22px; animation:floatUp 6s linear infinite; opacity:.8}
-@keyframes floatUp{from{transform:translateY(0)}to{transform:translateY(-120vh); opacity:0}}
-
-/* confetti */
-.confetti{position:fixed; width:8px; height:8px; top:0; animation:fall 2s linear forwards}
-@keyframes fall{to{transform:translateY(300px) rotate(360deg); opacity:0}}
-
-/* FINAL */
-#finalScreen{
-  position:fixed; inset:0; display:none; align-items:center; justify-content:center; z-index:100;
-  background:linear-gradient(180deg,var(--bg),var(--bg2)); color:#fefce8; padding:26px;
+input{
+  padding:10px;
+  width:90%;
+  border-radius:10px;
+  border:2px solid #064e3b;
 }
-#finalCard{
-  max-width:620px; background:rgba(0,0,0,.18); border:3px solid var(--gold);
-  border-radius:18px; padding:22px; box-shadow:0 16px 0 rgba(0,0,0,.25)
+
+.heart{
+  position:fixed;
+  bottom:-20px;
+  font-size:20px;
+  animation:float 6s linear infinite;
 }
-#finalCard h2{margin-top:0}
-#letter{line-height:1.7}
-.badge{display:inline-block; padding:6px 10px; border-radius:999px; background:#dcfce7; border:2px solid #065f46; color:#065f46}
-.small{opacity:.9; font-size:13px}
+
+@keyframes float{
+  from{transform:translateY(0);}
+  to{transform:translateY(-120vh); opacity:0;}
+}
+
+#final{
+  display:none;
+  background:#065f46;
+  color:#fff;
+  padding:30px;
+  margin-top:20px;
+  border-radius:14px;
+}
 </style>
 </head>
 
 <body>
 
-<div id="coins">🪙 <span id="coinCount">0</span></div>
-<div class="progress"><div id="bar"></div></div>
-
 <h1>Para mi pestosa hermosa 💚</h1>
-<div id="subtitle">con amor, mi tdh me obligó a crearte esta locura 😌</div>
+<div id="subtitle">con amor, porque te pienso más de lo que digo 😌</div>
 
 <div class="container">
 
-<div class="characters">
-  <img src="juju.png" alt="">
-  <img src="novia.png" alt="">
-  <img src="gato.png" alt="">
-  <img src="perrito.png" alt="">
-</div>
-
 <!-- NIVEL 1 -->
-<h2>💚 Nivel 1 — Presentación con cariño</h2>
-<p>Escribe uno de tus nombres bonitos (los secretos 😌)</p>
-<input id="greet" placeholder="escribe aquí…">
+<h2>💚 Nivel 1</h2>
+<p>Escribe uno de tus nombres bonitos</p>
+<input id="nameInput" placeholder="aquí…">
 <br><br>
-<button onclick="checkGreeting()">Validar amor</button>
+<button onclick="checkName()">Comprobar</button>
 <p id="msg1"></p>
 
 <hr>
 
 <!-- NIVEL 2 -->
 <div id="level2" style="display:none;">
-  <h2>😈 Nivel 2 — La verdad que sabemos</h2>
-  <p><b>¿Me amas o me odias?</b></p>
-  <button onclick="loveAnswer()">💚 Te amo</button>
-  <button onclick="loveAnswer()">😒 Te odio (mentira)</button>
-  <p id="msg2"></p>
-
-  <div id="proposal" style="display:none;">
-    <p class="badge">momento serio pero bonito</p>
-    <p><b>¿Quieres volver a ser mi mujer?</b></p>
-    <button onclick="proposalYes()">💍 Sí, obvio</button>
-    <button onclick="proposalYes()">💍 Sí, pero no llores</button>
-  </div>
+<h2>😈 Nivel 2</h2>
+<p>¿Me amas o me odias?</p>
+<button onclick="love()">💚 Te amo</button>
+<button onclick="love()">😒 Te odio (mentira)</button>
+<p id="msg2"></p>
 </div>
 
 <hr>
 
 <!-- NIVEL 3 -->
 <div id="level3" style="display:none;">
-  <h2>🔥 Nivel 3 — Reconocimiento oficial</h2>
-  <p>¿Tu hombre se rifó con esta sorpresa?</p>
-  <button onclick="proudAnswer()">😎 Se rifó cabrón</button>
-  <button onclick="proudAnswer()">🥹 Sí y me dio ternura</button>
-  <p id="msg3"></p>
+<h2>🔥 Nivel 3</h2>
+<p>¿Tu hombre se rifó con esta sorpresa?</p>
+<button onclick="proud()">😎 Se rifó</button>
+<button onclick="proud()">🥹 Sí y me dio ternura</button>
 </div>
 
 <hr>
 
-<!-- NIVEL 4 -->
-<div id="level4" style="display:none;">
-  <h2>☕ Nivel 4 — Frase final</h2>
-  <p><b>“Me encanta mi niño ________”</b></p>
-  <button onclick="coffeeAnswer()">☕ cafecito</button>
-  <button onclick="coffeeAnswer()">💚 precioso</button>
-  <p id="msg4"></p>
-</div>
-
-</div>
-
 <!-- FINAL -->
-<div id="finalScreen">
-  <div id="finalCard">
-    <h2>💍 Mi mujer, mi casa, mi todo</h2>
-    <p id="letter"></p>
-    <p class="small">💚 Siempre tuyo — JUJU</p>
-    <span class="badge">MUAK 💋</span>
-  </div>
-</div>
-
-<audio id="kissSound">
-  <source src="https://assets.mixkit.co/sfx/preview/mixkit-quick-kiss-2155.mp3">
-</audio>
-
-<script>
-/* ===== utilidades ===== */
-let coins=0, progress=0;
-const bar=document.getElementById('bar');
-const kiss=()=>document.getElementById('kissSound').play();
-const addCoins=n=>{coins+=n; coinCount.textContent=coins};
-const setProg=p=>{progress=Math.min(100,p); bar.style.width=progress+'%'};
-const confetti=()=>{
-  for(let i=0;i<20;i++){
-    const c=document.createElement('div');
-    c.className='confetti';
-    c.style.left=Math.random()*innerWidth+'px';
-    c.style.background=['#facc15','#22c55e','#3b82f6','#ec4899'][Math.floor(Math.random()*4)];
-    document.body.appendChild(c);
-    setTimeout(()=>c.remove(),2000);
-  }
-};
-/* corazones constantes */
-setInterval(()=>{
-  const h=document.createElement('div');
-  h.className='heart';
-  h.textContent=['💚','💖','💕','💞'][Math.floor(Math.random()*4)];
-  h.style.left=Math.random()*100+'vw';
-  h.style.fontSize=(18+Math.random()*22)+'px';
-  document.body.appendChild(h);
-  setTimeout(()=>h.remove(),6000);
-},650);
-
-/* ===== FRASES DINÁMICAS (AMOR) ===== */
-const L1=[
- "💚 Correctísimo, mi vida… ven acá que te abrazo. MUAK",
- "🥰 Así me gusta, mi cachetes hermosa. Aquí estoy.",
- "✨ Lo hiciste perfecto, mi niña. Estoy orgulloso.",
- "💋 Sabía que eras tú. Siempre tú."
-];
-const L2=[
- "😌 Aunque te hagas, yo sé lo que sientes.",
- "💚 Tu respuesta me llegó al pecho.",
- "🥹 Gracias por elegirme otra vez."
-];
-const L3=[
- "😎 OBVIO se rifó… y lo volvería a hacer mil veces.",
- "🔥 Me esforcé porque tú lo vales.",
- "🥰 Se rifó con amor, que es lo importante."
-];
-const L4=[
- "☕ Cafecito para mi amor, siempre.",
- "💚 Precioso por dentro y por fuera.",
- "✨ Gracias por caminar conmigo."
-];
-
-/* ===== CARTAS FINALES (ROTAN) ===== */
-const LETTERS=[
-`No hice esto por juego.<br><br>
-Lo hice porque te amo con intención, con paciencia y con ganas.
+<div id="final">
+<h2>💍 Mi mujer, mi casa, mi todo</h2>
+<p>
+No hice esto por juego.<br><br>
+Lo hice porque te amo con intención,
+con paciencia y con ganas.
 Porque eres mi hogar cuando el mundo pesa,
 mi risa cuando todo tiembla,
-mi cachetes hermosa, mi niña, mi paz.<br><br>
-Gracias por volver, por quedarte y por elegirme.`,
-`Si alguna vez dudas, vuelve aquí.<br><br>
-Aquí está mi promesa silenciosa:
-cuidarte, escucharte y elegirte,
-en los días fáciles y en los que cuestan.<br><br>
-Eres mi casa, incluso cuando llueve.`,
-`No sé hacerlo pequeño cuando se trata de ti.<br><br>
-Te amo a lo grande, con detalle,
-con tiempo, con constancia.<br><br>
-Gracias por ser mi amor bonito.`,
-`No hice esto por presumir.<br><br>
-Lo hice para recordarte que te pienso,
-que te elijo,
-y que mi lugar favorito sigue siendo contigo.`
-];
+mi cachetes hermosa,
+mi niña,
+mi paz.<br><br>
+Gracias por volver,
+por quedarte
+y por elegirme.<br><br>
+💚 Siempre tuyo — JUJU
+</p>
+</div>
 
-/* ===== NIVELES ===== */
-function pick(arr){ return arr[Math.floor(Math.random()*arr.length)] }
+</div>
 
-function checkGreeting(){
-  const t=greet.value.toLowerCase();
-  const ok=["piojito","cachetitos","yamimiris","yam","yami"];
-  if(ok.some(v=>t.includes(v))){
-    msg1.innerHTML = pick(L1) + " <span class='badge'>MUAK 💋</span>";
-    addCoins(5); confetti(); kiss(); setProg(25);
-    level2.style.display='block';
-    level2.scrollIntoView({behavior:'smooth'});
+<script>
+// corazones flotando
+setInterval(()=>{
+  const h=document.createElement("div");
+  h.className="heart";
+  h.innerHTML=["💚","💖","💕"][Math.floor(Math.random()*3)];
+  h.style.left=Math.random()*100+"vw";
+  document.body.appendChild(h);
+  setTimeout(()=>h.remove(),6000);
+},800);
+
+// NIVEL 1 — AQUÍ ESTÁ LA CLAVE
+function checkName(){
+  const text = document.getElementById("nameInput").value.toLowerCase();
+
+  const apodos = [
+    "piojito",
+    "cachetitos",
+    "yamimiris",
+    "yam",
+    "yami",
+    "rabanito"
+  ];
+
+  if(apodos.some(a => text.includes(a))){
+    document.getElementById("msg1").innerHTML =
+      "💚 Correcto mi amor… mi rabanito hermoso 😌 MUAK 💋";
+    document.getElementById("level2").style.display="block";
   }else{
-    msg1.innerHTML="😌 Escríbelo bonito… como cuando me miras.";
+    document.getElementById("msg1").innerHTML =
+      "😌 Escríbelo bonito… como cuando me miras";
   }
 }
-function loveAnswer(){
-  msg2.innerHTML = pick(L2) + " <span class='badge'>te amo</span>";
-  addCoins(5); confetti(); kiss(); setProg(45);
-  proposal.style.display='block';
+
+// NIVEL 2
+function love(){
+  document.getElementById("msg2").innerHTML =
+    "💚 Yo sabía… aunque te hagas 😌";
+  document.getElementById("level3").style.display="block";
 }
-function proposalYes(){
-  addCoins(10); confetti(); kiss(); setProg(65);
-  level3.style.display='block';
-  level3.scrollIntoView({behavior:'smooth'});
-}
-function proudAnswer(){
-  msg3.innerHTML = pick(L3) + " <span class='badge'>MUAK</span>";
-  addCoins(10); confetti(); kiss(); setProg(85);
-  level4.style.display='block';
-  level4.scrollIntoView({behavior:'smooth'});
-}
-function coffeeAnswer(){
-  msg4.innerHTML = pick(L4);
-  addCoins(15); confetti(); kiss(); setProg(100);
-  showFinal();
-}
-function showFinal(){
-  document.getElementById('letter').innerHTML = pick(LETTERS);
-  finalScreen.style.display='flex';
+
+// NIVEL 3
+function proud(){
+  document.getElementById("final").style.display="block";
 }
 </script>
 
